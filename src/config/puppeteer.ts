@@ -2,9 +2,7 @@ import puppeteer from 'puppeteer'
 import 'dotenv/config'
 
 export default async function ConfigPuppeteerPage() {
-    const browser = await puppeteer.launch({
-        executablePath: '/usr/bin/google-chrome'
-    });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
     await page.goto(process.env.URL!);
