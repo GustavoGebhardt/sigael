@@ -7,7 +7,7 @@ export default {
     async handle(ctx: Context, bot: Telegraf<Context<Update>>) {
         let years: string[] = []
         const bulletinPage = await login(ctx.text?.split(",")[0]!, ctx.text?.split(",")[1]!, ctx)
-        if(bulletinPage){
+        if (bulletinPage) {
             const { browser, page } = bulletinPage
 
             await page.locator('xpath//html/body/div[2]/div[2]/div[1]/div[1]/div/form/div/div[1]/table/tbody/tr[2]').click()
@@ -22,15 +22,27 @@ export default {
                 bot.action(`ANO_${year.charAt(year.length - 1)}`, async (ctx: Context) => {
                     ctx.reply('Fazendo download do arquvio...')
 
+                    const fileName = `${crypto.randomUUID()}.pdf`;
+
                     await page.locator(`xpath//html/body/div[2]/div[2]/form[2]/table/tbody/tr[${year.charAt(year.length - 1)}]/td[3]/a`).click();
                     await page.waitForNavigation()
-                    await page.screenshot({
-                        path: 'screenshot.png',
-                        fullPage: true
+                    await page.pdf({
+                        path: fileName,
+                        format: 'A4',
+                        printBackground: true,
+                        margin: {
+                            top: '20mm',
+                            right: '10mm',
+                            bottom: '20mm',
+                            left: '10mm',
+                        },
                     });
 
-                    await ctx.replyWithPhoto({ source: fs.createReadStream('screenshot.png') });
-                    fs.rm('screenshot.png', (err) => {
+                    await ctx.replyWithDocument({
+                        source: fs.createReadStream(fileName),
+                        filename: 'boletim.pdf'
+                    });
+                    fs.rm(fileName, (err) => {
                         if (err) {
                             console.error('Erro ao remover o arquivo:', err);
                         }

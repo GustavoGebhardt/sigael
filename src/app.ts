@@ -14,7 +14,7 @@ export default async function App() {
         switch (option) {
             case OptionsEnum.MENU:
                 menuHandler.showMenu(ctx);
-                break;  
+                break;
             case OptionsEnum.BULLETIN:
                 bulletinHandler.handle(ctx, bot);
                 option = OptionsEnum.MENU

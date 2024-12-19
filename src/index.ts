@@ -1,3 +1,5 @@
 import application from "./app"
 
-application()
+application().then(() => {
+    console.log("SigaelBot iniciado com sucesso!")
+});
