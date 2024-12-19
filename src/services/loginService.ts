@@ -1,8 +1,9 @@
 import ConfigPuppeteerPage from "../config/puppeteer"
 
-export default async function loginIntoWebsite(user: string, password: string, ctx: any) {
+export default async function login(user: string, password: string, ctx: any) {
     if (user == undefined || password == undefined || user.length != 11) {
         ctx.reply('Dados invalidos! Formato esperado (ex: usuario,senha)');
+        return null
     } else {
         const { browser, page } = await ConfigPuppeteerPage()
 
@@ -20,6 +21,7 @@ export default async function loginIntoWebsite(user: string, password: string, c
             ctx.reply('Dados invalidos! Usuario ou senha incorretos');
             await page.close();
             await browser.close();
+            return null
         }
     }
 }
