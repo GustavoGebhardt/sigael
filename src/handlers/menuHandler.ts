@@ -5,8 +5,13 @@ export default {
         ctx.reply(
             'Opa, bom dia! Como posso ajudar você hoje?',
             Markup.inlineKeyboard([
-                [Markup.button.callback('Visualizar Boletim', 'SHOW_BULLETIN')],
-                [Markup.button.callback('Obter Atestado de Matricula', 'SHOW_REGISTRATION')]
+                [Markup.button.callback('📃 Obter Boletim', 'SHOW_BULLETIN')],
+                [Markup.button.callback('📝 Obter Atestado de Matrícula', 'SHOW_REGISTRATION')],
+                [Markup.button.callback('🪪 Visualizar Número de Matrícula', 'SHOW_REGISTRATION')],
+                [Markup.button.callback('📬 E-mail dos Professores', 'SHOW_REGISTRATION')],
+                [Markup.button.callback('🤩 Sugestões de Melhoria', 'SHOW_REGISTRATION')],
+                [Markup.button.callback('💗 Ajude a manter o SigaelBot', 'SHOW_REGISTRATION')]
+
             ])
         );
     }
