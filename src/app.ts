@@ -4,6 +4,7 @@ import { ActionsEnum } from "./enums/actionsEnum"
 import menuHandler from "./handlers/menuHandler"
 import bulletinHandler from "./handlers/bulletinHandler"
 import registrationHandler from "./handlers/registrationHandler"
+import registrationCodeHandler from "./handlers/registrationCodeHandler"
 
 export default async function App() {
     let option: number = 0;
@@ -23,6 +24,22 @@ export default async function App() {
                 registrationHandler.handle(ctx);
                 option = OptionsEnum.MENU
                 break;
+            case OptionsEnum.REGISTRATIONCODE:
+                registrationCodeHandler.handle(ctx);
+                option = OptionsEnum.MENU
+                break;
+            case OptionsEnum.EMAILTEACHERS:
+
+                option = OptionsEnum.MENU
+                break;
+            case OptionsEnum.FEEDBACK:
+
+                option = OptionsEnum.MENU
+                break;
+            case OptionsEnum.DONATION:
+
+                option = OptionsEnum.MENU
+                break;
         }
     });
 
@@ -34,6 +51,11 @@ export default async function App() {
     bot.action(ActionsEnum.SHOW_REGISTRATION, (ctx) => {
         ctx.reply('Por favor, informe seu nome de usuário e senha separados por vírgula (ex: usuario,senha):');
         option = OptionsEnum.REGISTRATION
+    });
+
+    bot.action(ActionsEnum.SHOW_REGISTRATIONCODE, (ctx) => {
+        ctx.reply('Por favor, informe seu nome de usuário e senha separados por vírgula (ex: usuario,senha):');
+        option = OptionsEnum.REGISTRATIONCODE
     });
 
     bot.launch();
