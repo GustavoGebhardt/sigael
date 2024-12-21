@@ -48,8 +48,6 @@ export default {
                         }
                     });
 
-                    ctx.reply('Espero ter ajudado. Precisando de mim, estou aqui!');
-
                     await page.close();
                     await browser.close();
                 });
